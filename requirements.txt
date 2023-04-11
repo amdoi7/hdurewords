@@ -1,0 +1,4 @@
+pandas==1.5.3
+pycryptodome==3.17
+PyExecJS==1.5.1
+requests==2.28.2

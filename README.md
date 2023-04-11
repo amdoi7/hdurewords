@@ -1,9 +1,13 @@
 # hdurewords
-杭电 我爱记单词 脱机完成 基于GPT4 正确率 90+ 
+杭电 我爱记单词 脱机全自动完成 基于GPT4 正确率 95+ 
 
-使用方法：
+#使用方法：
 
-新建一个python文件 安装以下操作 
+1. 打开文件目录 打开cmd窗口
+输入 pip install -r requirements.txt
+安装完成后 回到根目录
+
+2. 新建一个python文件 输入以下代码 
 
 ```python
 from rewords import REWORDS
@@ -16,7 +20,7 @@ if __name__ == '__main__':
     dalay 延迟交卷 以分钟为单位  自测可以不管 考试的话建议填写2-4
     """
     user = REWORDS(user_id='', user_password='',
-                 mode=0, week=1, delay=0)
+                    mode=0, week=1, delay=0)
     
 ```
 

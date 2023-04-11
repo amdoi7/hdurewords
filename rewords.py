@@ -13,10 +13,10 @@ def get_an(msg):
     headers = {
         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Cursor/0.1.0 Chrome/108.0.5359.62 Electron/22.0.0 Safari/537.36",
         "content-type": "application/json",
-        "accept": "*/*",
         "sec-fetch-site": "cross-site",
         "sec-fetch-type": "cors",
         "sec-fetch-dest": "empty",
+        # 'authorization': 'Bearer '
         "accept-encoding": "gzip, deflate, br",
         "accept-language": "zh-CN"
     }
@@ -30,7 +30,7 @@ def get_an(msg):
             "copilotCodeBlocks": [],
             "customCodeBlocks": [],
             "codeBlockIdentifiers": [],
-            "msgType": "freeform", 
+            "msgType": "freeform",
             "maxOrigLine": None
         },
         "userMessages": [
@@ -64,9 +64,9 @@ def get_an(msg):
         response = re.sub(r'data:|"|\n| |\.', "", response)
         print(response)
         # 正则匹配  -(.+?)-(.+?)(?=\-|<)
-        
+
         res = re.findall(r'-(.+?):(.+?)(?=\-|<)',
-                         response, re.S)
+                            response, re.S)
         # if not res:
         #     res = re.findall(r'-(.+?)-(.+?)(?=\-|<)',
         #                      response, re.S)
@@ -80,7 +80,7 @@ class REWORDS:
         response = requests.get(
             "https://skl.hdu.edu.cn/api/paper/detail?paperId=" + paperid,
             headers=self._get_headers)
-        print(f"得分：{json.loads(response.text)['mark']} 耗时：{json.loads(response.text)['totalTime']/1000}秒")
+        print(f"得分：{json.loads(response.text)['mark']} 耗时：{json.loads(response.text)['totalTime'] / 1000}秒")
 
     def paper_data(self, type=0, week=6):
         # 获取当前时间戳
@@ -113,7 +113,7 @@ class REWORDS:
         requests.post(url, headers=postHeaders, data=answer)
 
     def __init__(self, user_id='', user_password='',
-                 mode=0, week=1, delay=0):
+                    mode=0, week=1, delay=0):
         self._get_headers = {
             'Accept': 'application/json, text/plain, */*',
             'Accept-Encoding': 'gzip, deflate, br',
@@ -184,5 +184,5 @@ class REWORDS:
             index += self._loopStep
         time.sleep(60 * delay)
         self.post_data(json.dumps(self._answer_dict), self._X_Auth_Token)
-        self._get_headers.update({'skl-ticket': str(uuid.uuid1()),})
+        self._get_headers.update({'skl-ticket': str(uuid.uuid1()), })
         self.get_mark(self._paper['paperId'])
